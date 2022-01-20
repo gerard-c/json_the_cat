@@ -7,7 +7,7 @@ fetchBreedDescription(breedName, (error, desc) => {
     console.log(`Error fetch details: ${error}`);
     return;
   } else if (!desc) {
-    // if entered cat breed is invalid, prompts user top do it properly
+    // if entered cat breed is invalid, prompts user to do it properly
     console.log('Please enter a valid breed of cat');
     return;
   }
