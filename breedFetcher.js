@@ -1,13 +1,11 @@
 const request = require('request');
-const breedName = process.argv[2];
-
 
 const fetchBreedDescription = (breedName, callback) => {
   request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, (error, response, body) => {
     // logs error details on failure to GET info
     if (error) {
       callback(error, null);
-      return
+      return;
     }
     // converts string received by request into array containing object
     const data = JSON.parse(body);
