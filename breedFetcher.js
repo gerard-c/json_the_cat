@@ -9,7 +9,7 @@ const fetchBreedDescription = (breedName, callback) => {
     }
     // converts string received by request into array containing object
     const data = JSON.parse(body);
-    // logs error details if invalid search returns empty array
+    // logs custom error message if cat breed is invalid
     if (data.length === 0) {
       callback(error, null);
       return;
