@@ -15,4 +15,13 @@ describe('fetchBreedDescription', () => {
       done();
     });
   });
+
+  it('should run callback function with desc parameter as null on invalid breed entry', (done) => {
+    fetchBreedDescription('husky', (err, desc) => {
+
+      assert.equal(desc, null);
+
+      done();
+    });
+  });
 });
