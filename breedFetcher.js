@@ -1,17 +1,27 @@
 const request = require('request');
-const args = process.argv.slice(2);
+const breedName = process.argv[2];
 
 
-request(`https://api.thecatapi.com/v1/breeds/search?q=${args[0]}`, (error, response, body) => {
-  if (error) {
-    console.error('Error: Request failed');
-    return;
-  }
-  const data = JSON.parse(body);
-  if (data.length === 0) {
-    console.log('Error: Please input a valid breed of cat and try again');
-    return;
-  }
-  console.log(data[0].description);
-});
+const fetchBreedDescription = (breedName, callback) => {
+  request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, (error, response, body) => {
+    // logs error details on failure to GET info
+    if (error) {
+      callback(error, null);
+      return
+    }
+    // converts string received by request into array containing object
+    const data = JSON.parse(body);
+    // logs error details if invalid search returns empty array
+    if (data.length === 0) {
+      callback(error, null);
+      return;
+    }
+    // if there are no errors logs value of description key in cat object
+    callback(null, data[0].description);
+  });
+};
+
+module.exports = { fetchBreedDescription };
+
+
 
